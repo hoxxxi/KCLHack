@@ -31,7 +31,7 @@ public class Football_List_Adapter extends ArrayAdapter<Game> {
 		View itemView = convertView;
 		if(itemView==null)
 			itemView = li.inflate(R.layout.item_list_football, parent, false);
-		//get current person
+		//get current game
 		Game currentGame = gameList.get(position);
 		//fill views
 		ImageView leaguePic = (ImageView) itemView.findViewById(R.id.item_our_immage);
@@ -40,13 +40,11 @@ public class Football_List_Adapter extends ArrayAdapter<Game> {
 		TextView score = (TextView) itemView.findViewById(R.id.item_Score_TV);
 		TextView teamTwo = (TextView) itemView.findViewById(R.id.item_TeamTwo_TV);
 		TextView time = (TextView) itemView.findViewById(R.id.item_time_TV);
-		TextView latestUpdate = (TextView) itemView.findViewById(R.id.item_LatestUpdate_TV);
 		//put values
 		teamOne.setText(currentGame.getTeam_One());
 		score.setText(currentGame.getScore());
 		teamTwo.setText(currentGame.getTeam_Two());
 		time.setText(currentGame.getTime()+"\"");
-		latestUpdate.setText(currentGame.getLatestUpdate());
 		return itemView;
 	}
 	

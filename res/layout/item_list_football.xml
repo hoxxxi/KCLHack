@@ -2,31 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
-
-    <ImageView
-        android:id="@+id/item_our_immage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:src="@drawable/ic_launcher" />
-
-    <TextView
-        android:id="@+id/item_time_TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text=" 99" />
-
+    
     <LinearLayout
+        android:id="@+id/textLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/item_time_TV"
+        android:layout_toLeftOf="@+id/item_our_immage2"
         android:layout_toRightOf="@+id/item_our_immage"
         android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="horizontal" >
 
             <TextView
@@ -37,11 +25,10 @@
                 android:text="Team1" />
 
             <TextView
-                android:id="@+id/item_Score_TV"
+                android:id="@+id/does_not_matter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0-0"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:text=":"/>
 
             <TextView
                 android:id="@+id/item_TeamTwo_TV"
@@ -52,10 +39,34 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/item_LatestUpdate_TV"
+            android:id="@+id/item_Score_TV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Someone got kicked in his balls" />
+            android:text="0 : 0" 
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+	        android:id="@+id/item_time_TV"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="69"
+	        android:layout_gravity="center_horizontal"/>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/item_our_immage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/item_our_immage2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>
