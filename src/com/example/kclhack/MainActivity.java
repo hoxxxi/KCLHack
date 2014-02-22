@@ -2,10 +2,13 @@ package com.example.kclhack;
 
 import java.util.ArrayList;
 
+import com.getpebble.android.kit.PebbleKit;
+
 import data_types.Football_List_Adapter;
 import data_types.Game;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.ListView;
 
@@ -20,6 +23,10 @@ private ArrayList<Game> gameArray;
 		populate();
 		Football_List_Adapter adapter = new Football_List_Adapter(MainActivity.this, gameArray);
 		gamesList.setAdapter(adapter);
+		
+		//check if the the pebble is connected
+		boolean connected = PebbleKit.isWatchConnected(getApplicationContext());
+		Log.i(getLocalClassName(), "Pebble is " + (connected ? "connected" : "not connected"));
 		
 	}
 
