@@ -45,13 +45,15 @@ private final static UUID PEBBLE_APP_UUID = UUID.fromString("03dce863-84b3-4d20-
 	
 	public void sendAlertToPebble() {
 	    final Intent i = new Intent("com.getpebble.action.SEND_NOTIFICATION");
+	  
+	   
 
 	    final Map data = new HashMap();
-	    data.put("title", "Fucking porn stars is great");
-	    data.put("body", "Yordan says football sucks but he would fucka  pornstar");
+	    data.put("title", "This is a test");
+	    data.put("body", "This is a medium body. Not too long, not too short");
 	    final JSONObject jsonData = new JSONObject(data);
 	    final String notificationData = new JSONArray().put(jsonData).toString();
-
+	    
 	    i.putExtra("messageType", "PEBBLE_ALERT");
 	    i.putExtra("sender", "MyAndroidApp");
 	    i.putExtra("notificationData", notificationData);
