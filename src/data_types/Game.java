@@ -24,7 +24,11 @@ import com.example.kclhack.MainActivity;
 
 public class Game {
 	private String team_One, team_Two, score,homeid,awayid;
+	private String baseURL = "http://internal.wolfmax.co.uk/football/FakeData";
 	private static String latestUpdate;
+	private String time;
+	public static ArrayList<GameDetail> gameDetails = new ArrayList<GameDetail>();
+	
 	public String getHomeId() {
 		return homeid;
 	}
@@ -42,9 +46,6 @@ public class Game {
 	{
 		this.awayid = id;
 	}
-
-	private String time;
-	public static ArrayList<GameDetail> gameDetails = new ArrayList<GameDetail>();
 	
 
 	public Game(String team_One, String team_Two, String score, String time) {
@@ -95,10 +96,10 @@ public class Game {
 		this.time = time;
 	}
 	
-	public static void fetchDetails(Game game)
+	public static void fetchLiveDetails(String url)
 	{
 		//"http://api.statsfc.com/live.json?key=gL7Q3AhOOdQCZI0GggwCC4KlUwf3DaAWXUhfhyLJ&competition=premier-league&team=" + game.getTeam_One()
-		String jsonDetailsString = readData("http://internal.wolfmax.co.uk/fakedata1.txt");
+		String jsonDetailsString = readData(url);
 		try
 		{
 			JSONArray arr = new JSONArray(jsonDetailsString);
