@@ -105,7 +105,7 @@ public class Game {
                         JSONArray arr = new JSONArray(jsonDetailsString);
                         JSONObject ob = arr.getJSONObject(0);
                         JSONArray detailsArray = ob.getJSONArray("incidents");
-                       
+                       gameDetails.clear();
                         for(int i=0;i<detailsArray.length();i++)
                         {
                                 JSONObject detailObject = detailsArray.getJSONObject(i);

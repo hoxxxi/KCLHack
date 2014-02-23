@@ -7,6 +7,7 @@ import java.util.*;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -22,6 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.kclhack.R;
+import com.novoda.imageloader.core.util.DirectLoader;
 
 import data_types.Football_List_Adapter;
 import data_types.Game;
@@ -31,7 +33,8 @@ public class LiveFragment extends Fragment implements OnItemClickListener{
 	private ArrayList<Game> gameArray;
 	private Football_List_Adapter adapter;
 	public ListView gamesList;
-
+	public static ImageView hostTeam;
+	public static ImageView guestTeam;
 	
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -127,8 +130,8 @@ public class LiveFragment extends Fragment implements OnItemClickListener{
                 Button update = (Button) view.findViewById(R.id.ubdateFromServerBtn);
                 
 
-                ImageView hostTeam = (ImageView) view.findViewById(R.id.host_team);
-                ImageView guestTeam = (ImageView) view.findViewById(R.id.guest_team);
+                hostTeam = (ImageView) view.findViewById(R.id.host_team);
+                guestTeam = (ImageView) view.findViewById(R.id.guest_team);
                 
                 teamOneName.setText(game.getTeam_One());
                 teamTwoName.setText(game.getTeam_Two());
@@ -162,11 +165,12 @@ public class LiveFragment extends Fragment implements OnItemClickListener{
                 
                 
                 String strHome = "http://internal.wolfmax.co.uk/football/logo/a" + game.getHomeId()+".png";
-                String strAway = "http://internal.wolfmax.co.uk/football/logo/a" + game.getHomeId()+".png";
+                String strAway = "http://internal.wolfmax.co.uk/football/logo/a" + game.getAwayId()+".png";
 
                 
                 //Image Loading
-//                new ImageLoaderTask().execute(strHome,strAway,teamOneName,teamTwoName);
+               ImageLoaderTask ILT = new ImageLoaderTask();
+               ILT.execute(strHome,strAway,teamOneName,teamTwoName);
                 
                 dialogBuilder.setView(view);
                 dialogBuilder.setNegativeButton("Ok",
@@ -199,6 +203,7 @@ public class LiveFragment extends Fragment implements OnItemClickListener{
     					// TODO Auto-generated catch block
     					e.printStackTrace();
     				}
+                    
                     otherData.setText("");
                     for(int i=0; i<game.gameDetails.size();i++){
     					otherData.append(game.gameDetails.get(i).getDetailTime() +"' ");
@@ -227,6 +232,28 @@ public class LiveFragment extends Fragment implements OnItemClickListener{
 		
 		SimpleDialogFragment dialogFragment = SimpleDialogFragment.newInstance("Details",game);
         dialogFragment.show(this.getFragmentManager(),"");
+		
+	}
+	protected static class ImageLoaderTask extends AsyncTask<Object, Void, Bitmap>{
+    	
+		Bitmap bb;
+	@Override
+	protected Bitmap doInBackground(Object... params) {
+
+		
+		bb = new DirectLoader().download((String) params[1]);
+		
+		Bitmap b = new DirectLoader().download((String) params[0]);
+		return b;
+	}
+
+	@Override
+	protected void onPostExecute(Bitmap result) {
+		
+		
+		guestTeam.setImageBitmap(bb);
+		hostTeam.setImageBitmap(result);
+	}
 		
 	}
 

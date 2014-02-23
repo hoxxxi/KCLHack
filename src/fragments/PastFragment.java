@@ -39,6 +39,8 @@ public class PastFragment extends Fragment implements OnItemClickListener {
 	private Football_List_Adapter adapter;
 	public PastFragment fragment=this;
 	public ListView gamesList;
+	public static ImageView hostTeam;
+	public static ImageView guestTeam;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,7 +70,7 @@ public class PastFragment extends Fragment implements OnItemClickListener {
 		boolean connected = PebbleKit.isWatchConnected(getView().getContext());
 		Log.i("pastfragment", "Pebble is "
 				+ (connected ? "connected" : "not connected"));
-		sendAlertToPebble();
+		//sendAlertToPebble();
 
 		// Closing my app
 		// PebbleKit.closeAppOnPebble(getApplicationContext(), PEBBLE_APP_UUID);
@@ -175,8 +177,8 @@ public class PastFragment extends Fragment implements OnItemClickListener {
                 TextView score = (TextView) view.findViewById(R.id.item_Score_TV);
                 TextView time = (TextView) view.findViewById(R.id.item_time_TV);
 
-                ImageView hostTeam = (ImageView) view.findViewById(R.id.host_team);
-                ImageView guestTeam = (ImageView) view.findViewById(R.id.guest_team);
+                hostTeam = (ImageView) view.findViewById(R.id.host_team);
+                guestTeam = (ImageView) view.findViewById(R.id.guest_team);
                 
                 teamOneName.setText(game.getTeam_One());
                 teamTwoName.setText(game.getTeam_Two());
@@ -184,11 +186,11 @@ public class PastFragment extends Fragment implements OnItemClickListener {
                 time.setText(game.getTime());
                 
                 String strHome = "http://internal.wolfmax.co.uk/football/logo/a" + game.getHomeId()+".png";
-                String strAway = "http://internal.wolfmax.co.uk/football/logo/a" + game.getHomeId()+".png";
+                String strAway = "http://internal.wolfmax.co.uk/football/logo/a" + game.getAwayId()+".png";
 
                 
                 //Image Loading
-//                new ImageLoaderTask().execute(strHome,strAway,teamOneName,teamTwoName);
+               new ImageLoaderTask().execute(strHome,strAway,teamOneName,teamTwoName);
                 
                 dialogBuilder.setView(view);
                 dialogBuilder.setNegativeButton("Cancel",
@@ -210,34 +212,28 @@ public class PastFragment extends Fragment implements OnItemClickListener {
         }
         
         //Image Loading
-//        protected class ImageLoaderTask extends AsyncTask<Object, Void, Bitmap>{
-//    		String urlEndHomeString;
-//    		String urlEndAwayString;
-//    		 ImageView hostTeam;
-//    		 ImageView guestTeam;
-//    		Bitmap bb;
-//    	@Override
-//    	protected Bitmap doInBackground(Object... params) {
-//    		urlEndHomeString = (String) params[0];
-//    		urlEndAwayString = (String) params[1];
-//    		hostTeam= (ImageView) params[2];
-//    		guestTeam = (ImageView) params[3];
-//    		
-//    		bb = new DirectLoader().download(urlEndAwayString);
-//    		
-//    		Bitmap b = new DirectLoader().download(urlEndHomeString);
-//    		return b;
-//    	}
-//
-//    	@Override
-//    	protected void onPostExecute(Bitmap result) {
-//    		
-//    		
-//    		guestTeam.setImageBitmap(bb);
-//    		hostTeam.setImageBitmap(result);
-//    	}
-//    		
-//    	}
+        protected class ImageLoaderTask extends AsyncTask<Object, Void, Bitmap>{
+    	
+    		Bitmap bb;
+    	@Override
+    	protected Bitmap doInBackground(Object... params) {
+
+    		
+    		bb = new DirectLoader().download((String) params[1]);
+    		
+    		Bitmap b = new DirectLoader().download((String) params[0]);
+    		return b;
+    	}
+
+    	@Override
+    	protected void onPostExecute(Bitmap result) {
+    		
+    		
+    		guestTeam.setImageBitmap(bb);
+    		hostTeam.setImageBitmap(result);
+    	}
+    		
+   	}
 }
 
 }
