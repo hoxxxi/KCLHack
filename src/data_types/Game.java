@@ -220,8 +220,12 @@ public class Game {
 						+ "-" + ob.getJSONArray("runningscore").getString(1);
 				String homeTeam = ob.getString("home");
 				String awayTeam = ob.getString("away");
+				String homeID = ob.getString("home_id");
+				String awayID = ob.getString("away_id");
 
 				Game game = new Game(homeTeam, awayTeam, score, time);
+				game.setHomeId(homeID);
+				game.setAwayId(awayID);
 				gamesListLive.add(game);
 			}
 		} catch (JSONException e) {
@@ -248,9 +252,13 @@ public class Game {
 				String date = ob.getString("date");
 				String homeTeam = ob.getString("home");
 				String awayTeam = ob.getString("away");
+				String homeID = ob.getString("home_id");
+				String awayID = ob.getString("away_id");
 				String score = "0=0";
 
 				Game game = new Game(homeTeam, awayTeam, score, date);
+				game.setHomeId(homeID);
+				game.setAwayId(awayID);
 				gamesListUpcoming.add(game);
 
 			}
