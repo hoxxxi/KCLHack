@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -123,6 +124,8 @@ public class LiveFragment extends Fragment implements OnItemClickListener{
                 TextView score = (TextView) view.findViewById(R.id.item_Score_TV);
                 TextView time = (TextView) view.findViewById(R.id.item_time_TV);
                 final TextView otherData =(TextView) view.findViewById(R.id.allthedata);
+                Button update = (Button) view.findViewById(R.id.ubdateFromServerBtn);
+                
 
                 ImageView hostTeam = (ImageView) view.findViewById(R.id.host_team);
                 ImageView guestTeam = (ImageView) view.findViewById(R.id.guest_team);
@@ -166,7 +169,7 @@ public class LiveFragment extends Fragment implements OnItemClickListener{
 //                new ImageLoaderTask().execute(strHome,strAway,teamOneName,teamTwoName);
                 
                 dialogBuilder.setView(view);
-                dialogBuilder.setNegativeButton("Cancel",
+                dialogBuilder.setNegativeButton("Ok",
                                 new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id)
                                         {
@@ -175,12 +178,39 @@ public class LiveFragment extends Fragment implements OnItemClickListener{
                                                 dialog.dismiss();
                                         }
                                 });
-                dialogBuilder.setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                                // TODO Refresh PEBBLE
-                                        }
-                                });
+                
+             
+             update.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					java.lang.Thread t=new java.lang.Thread(new Runnable() {
+    					
+    					@Override
+    					public void run() {
+    						// TODO Auto-generated method stub
+    						game.fetchLiveDetails("http://internal.wolfmax.co.uk/football/FakeData2.txt");
+    					}
+    				});
+                    t.start();
+                    try {
+    					t.join();
+    				} catch (InterruptedException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+                    for(int i=0; i<game.gameDetails.size();i++){
+    					otherData.append(game.gameDetails.get(i).getDetailTime() +"' ");
+    					otherData.append(game.gameDetails.get(i).getDetailTeam() +" ");
+    					otherData.append(game.gameDetails.get(i).getDetailType() +" ");
+    					otherData.append(game.gameDetails.get(i).getDetailPlayer() +"\n");
+					
+				}
+                    PebbleConnect.sendAlertToPebble(getActivity(), game.getLatestDetail().getDetailTime() +"':"+ game.getLatestDetail().getDetailType(), 
+                    		game.getLatestDetail().getDetailTeam()+ " -> "+ game.getLatestDetail().getDetailPlayer());
+                   
+                    
+			}});
                 return dialogBuilder.create();
         }
 	}
