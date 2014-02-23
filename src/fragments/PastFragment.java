@@ -110,7 +110,6 @@ public class PastFragment extends Fragment implements OnItemClickListener {
 		Game selectedGame = gameArray.get(arg2);
 		openDetails.putExtra("TeamOne", selectedGame.getTeam_One());
 		openDetails.putExtra("TeamTwo", selectedGame.getTeam_Two());
-		openDetails.putExtra("Details", selectedGame.getDetails());
 		startActivity(openDetails);
 	}
 
