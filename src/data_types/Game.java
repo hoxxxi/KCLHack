@@ -209,7 +209,8 @@ public class Game {
 	//Getting a list of live games being played
 	public static ArrayList<Game> getLiveGames() {
 		ArrayList<Game> gamesListLive = new ArrayList<Game>();
-		String jsonString = readData("http://api.statsfc.com/live.json?key=gL7Q3AhOOdQCZI0GggwCC4KlUwf3DaAWXUhfhyLJ&competition=premier-league&timezone=CET");
+		//"http://api.statsfc.com/live.json?key=gL7Q3AhOOdQCZI0GggwCC4KlUwf3DaAWXUhfhyLJ&competition=premier-league&timezone=CET"
+		String jsonString = readData("http://internal.wolfmax.co.uk/football/FakeData1.txt");
 		try {
 			JSONArray arr = new JSONArray(jsonString);
 			for (int i = 0; i < arr.length(); i++) {
