@@ -23,7 +23,8 @@ import android.util.Log;
 import com.example.kclhack.MainActivity;
 
 public class Game {
-	private String team_One, team_Two, score, latestUpdate,homeid,awayid;
+	private String team_One, team_Two, score,homeid,awayid;
+	private static String latestUpdate;
 	public String getHomeId() {
 		return homeid;
 	}
@@ -115,6 +116,7 @@ public class Game {
 				
 				GameDetail detail = new GameDetail(type, team, player, minute);
 				gameDetails.add(detail);
+				latestUpdate = gameDetails.get(gameDetails.size()-1).getDetailType() + "," + gameDetails.get(gameDetails.size()-1).getDetailTeam() + "," + gameDetails.get(gameDetails.size()-1).getDetailPlayer() + "," + gameDetails.get(gameDetails.size()-1).getDetailTime();
 			}
 		}catch(JSONException e)
 		{
@@ -215,11 +217,11 @@ public class Game {
 			JSONArray arr = new JSONArray(jsonString);
 			for (int i = 0; i < arr.length(); i++) {
 				JSONObject ob = arr.getJSONObject(i);
-				String time = ob.getString("statusshort");
-				String score = ob.getJSONArray("runningscore").getString(0)
-						+ "-" + ob.getJSONArray("runningscore").getString(1);
+				
 				String homeTeam = ob.getString("home");
 				String awayTeam = ob.getString("away");
+				String score = ob.getJSONArray("fulltime").getString(0) + "-" + ob.getJSONArray("fulltime").getString(1);
+				String time = ob.getString("date");
 				String homeID = ob.getString("home_id");
 				String awayID = ob.getString("away_id");
 
@@ -232,7 +234,7 @@ public class Game {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		;
+		
 
 		return gamesListLive;
 
