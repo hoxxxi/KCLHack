@@ -49,10 +49,5 @@ public class MainActivity extends FragmentActivity {
 		transaction.replace(R.id.fragment, changeFragment);
 		transaction.addToBackStack(null);
 		transaction.commit();
-		
-		
-	}
-	
-	
-	
+	}	
 }

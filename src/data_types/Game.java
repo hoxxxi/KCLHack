@@ -257,7 +257,7 @@ public class Game {
                                 String awayTeam = ob.getString("away");
                                 String homeID = ob.getString("home_id");
                                 String awayID = ob.getString("away_id");
-                                String score = "0=0";
+                                String score = "0-0";
  
                                 Game game = new Game(homeTeam, awayTeam, score, date);
                                 game.setHomeId(homeID);
