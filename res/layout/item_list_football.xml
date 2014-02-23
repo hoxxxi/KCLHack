@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content" 
+    >
     
     <LinearLayout
         android:id="@+id/textLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft ="60dp"
+        android:layout_marginRight="60dp"
         android:layout_toLeftOf="@+id/item_our_immage2"
         android:layout_toRightOf="@+id/item_our_immage"
         android:orientation="vertical" >
@@ -54,7 +57,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/item_our_immage"
+        android:id="@+id/host_team"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -62,7 +65,7 @@
         android:src="@drawable/ic_launcher" />
 
     <ImageView
-        android:id="@+id/item_our_immage2"
+        android:id="@+id/guest_team"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

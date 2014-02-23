@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutionException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.example.kclhack.DetailedData;
 import com.example.kclhack.R;
 import com.getpebble.android.kit.PebbleKit;
 
@@ -21,9 +22,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class PastFragment extends Fragment {
+public class PastFragment extends Fragment implements OnItemClickListener {
 	private ArrayList<Game> gameArray;
 	private Football_List_Adapter adapter;
 
@@ -45,7 +48,8 @@ public class PastFragment extends Fragment {
 			e.printStackTrace();
 		}
 		
-		ListView gamesList = (ListView) getView().findViewById(R.id.gamesList);
+		ListView gamesList = (ListView) getView().findViewById(R.id.pastGamesList);
+		gamesList.setOnItemClickListener(this);
 		
 		adapter = new Football_List_Adapter(getView().getContext(), gameArray);
 		gamesList.setAdapter(adapter);
@@ -97,6 +101,17 @@ public class PastFragment extends Fragment {
 		protected ArrayList<Game> doInBackground(Void... params) {
 			return Game.getPastGames();
 			}
+	}
+
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		Intent openDetails = new Intent(getActivity(), DetailedData.class);
+		Game selectedGame = gameArray.get(arg2);
+		openDetails.putExtra("TeamOne", selectedGame.getTeam_One());
+		openDetails.putExtra("TeamTwo", selectedGame.getTeam_Two());
+		openDetails.putExtra("Details", selectedGame.getDetails());
+		startActivity(openDetails);
 	}
 
 }
