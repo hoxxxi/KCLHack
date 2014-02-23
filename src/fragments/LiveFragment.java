@@ -2,6 +2,7 @@ package fragments;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+import java.util.*;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -23,6 +24,7 @@ import com.example.kclhack.R;
 
 import data_types.Football_List_Adapter;
 import data_types.Game;
+import data_types.PebbleConnect;
 
 public class LiveFragment extends Fragment implements OnItemClickListener{
 	private ArrayList<Game> gameArray;
@@ -120,6 +122,7 @@ public class LiveFragment extends Fragment implements OnItemClickListener{
                 TextView teamTwoName = (TextView) view.findViewById(R.id.item_TeamTwo_TV);
                 TextView score = (TextView) view.findViewById(R.id.item_Score_TV);
                 TextView time = (TextView) view.findViewById(R.id.item_time_TV);
+                final TextView otherData =(TextView) view.findViewById(R.id.allthedata);
 
                 ImageView hostTeam = (ImageView) view.findViewById(R.id.host_team);
                 ImageView guestTeam = (ImageView) view.findViewById(R.id.guest_team);
@@ -128,6 +131,32 @@ public class LiveFragment extends Fragment implements OnItemClickListener{
                 teamTwoName.setText(game.getTeam_Two());
                 score.setText(game.getScore());
                 time.setText(game.getTime());
+                java.lang.Thread t=new java.lang.Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						game.fetchLiveDetails("http://internal.wolfmax.co.uk/football/FakeData1.txt");
+					}
+				});
+                t.start();
+                try {
+					t.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                for(int i=0; i<game.gameDetails.size();i++){
+					otherData.append(game.gameDetails.get(i).getDetailTime() +"' ");
+					otherData.append(game.gameDetails.get(i).getDetailTeam() +" ");
+					otherData.append(game.gameDetails.get(i).getDetailType() +" ");
+					otherData.append(game.gameDetails.get(i).getDetailPlayer() +"\n");
+					
+				}
+                PebbleConnect.sendAlertToPebble(getActivity(), game.getLatestDetail().getDetailTime() +"':"+ game.getLatestDetail().getDetailType(), 
+                		game.getLatestDetail().getDetailTeam()+ " -> "+ game.getLatestDetail().getDetailPlayer());
+               
+                
                 
                 String strHome = "http://internal.wolfmax.co.uk/football/logo/a" + game.getHomeId()+".png";
                 String strAway = "http://internal.wolfmax.co.uk/football/logo/a" + game.getHomeId()+".png";

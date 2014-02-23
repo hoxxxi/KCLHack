@@ -71,4 +71,13 @@
         android:layout_alignParentTop="true"
         android:src="@drawable/ic_launcher" />
 
+    <TextView
+        android:id="@+id/allthedata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/host_team"
+        android:layout_marginTop="22dp"
+        android:text="" />
+
 </RelativeLayout>
