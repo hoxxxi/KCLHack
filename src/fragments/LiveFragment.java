@@ -199,6 +199,7 @@ public class LiveFragment extends Fragment implements OnItemClickListener{
     					// TODO Auto-generated catch block
     					e.printStackTrace();
     				}
+                    otherData.setText("");
                     for(int i=0; i<game.gameDetails.size();i++){
     					otherData.append(game.gameDetails.get(i).getDetailTime() +"' ");
     					otherData.append(game.gameDetails.get(i).getDetailTeam() +" ");
