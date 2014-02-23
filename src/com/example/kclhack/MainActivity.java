@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
 		gamesList.setAdapter(adapter);
 		
 
-		// check if the the pebble is connected
+		// check if the pebble is connected
 		boolean connected = PebbleKit.isWatchConnected(getApplicationContext());
 		Log.i(getLocalClassName(), "Pebble is "
 				+ (connected ? "connected" : "not connected"));
