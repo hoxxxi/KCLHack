@@ -29,7 +29,11 @@ public class Game {
 	private String baseURL = "http://internal.wolfmax.co.uk/football/FakeData";
 	private static String latestUpdate;
 	private String time;
+<<<<<<< HEAD
 	public static ArrayList&lt;GameDetail&gt; gameDetails = new ArrayList&lt;GameDetail&gt;();
+=======
+	public static ArrayList<GameDetail> gameDetails = new ArrayList<GameDetail>();
+>>>>>>> 6c41389bf765d8c3438440c5d9eb26186cabd2fa
 	
 	public String getHomeId() {
 		return homeid;
@@ -100,7 +104,11 @@ public class Game {
 	
 	public static void fetchLiveDetails(String url)
 	{
+<<<<<<< HEAD
 		//"http://api.statsfc.com/live.json?key=gL7Q3AhOOdQCZI0GggwCC4KlUwf3DaAWXUhfhyLJ&amp;competition=premier-league&amp;team=" + game.getTeam_One()
+=======
+		//"http://api.statsfc.com/live.json?key=gL7Q3AhOOdQCZI0GggwCC4KlUwf3DaAWXUhfhyLJ&competition=premier-league&team=" + game.getTeam_One()
+>>>>>>> 6c41389bf765d8c3438440c5d9eb26186cabd2fa
 		String jsonDetailsString = readData(url);
 		try
 		{
