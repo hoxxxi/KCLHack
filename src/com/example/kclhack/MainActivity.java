@@ -63,9 +63,9 @@ private final static UUID PEBBLE_APP_UUID = UUID.fromString("03dce863-84b3-4d20-
 	}
 
 	private void populate() {
-		gameArray.add(new Game("Petrolu", "Rapid", "10-0", "Petrolistii dau muie la rapid", 20));
-		gameArray.add(new Game("Chelsea", "Barcelona", "0-2", "Red card for Chelsea", 30));
-		gameArray.add(new Game("Juventus", "Real Madrid", "3-1", "Juventus fans say that real madrid are wankers", 44));
+		gameArray.add(new Game("Petrolu", "Rapid", "10-0", "20"));
+		gameArray.add(new Game("Chelsea", "Barcelona", "0-2", "30"));
+		gameArray.add(new Game("Juventus", "Real Madrid", "3-1", "44"));
 	}
 
 	@Override
