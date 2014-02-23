@@ -70,7 +70,7 @@ public class Football_List_Adapter extends ArrayAdapter<Game> {
 		teamOne.setText(currentGame.getTeam_One());
 		score.setText(currentGame.getScore());
 		teamTwo.setText(currentGame.getTeam_Two());
-		time.setText(currentGame.getTime()+"\"");
+		time.setText(currentGame.getTime());
 		new ImageLoaderTask().execute(strHome,strAway,hostTeam,guestTeam);
 
 		return itemView;

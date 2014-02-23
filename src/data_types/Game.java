@@ -115,6 +115,7 @@ public class Game {
                                 String player = detailObject.getString("player");
                                 String minute = detailObject.getString("minute");
                                
+                                Log.v("tx",minute);
                                 GameDetail detail = new GameDetail(type, team, player, minute);
                                 gameDetails.add(detail);
                                 latestUpdate = gameDetails.get(gameDetails.size()-1).getDetailType() + "," + gameDetails.get(gameDetails.size()-1).getDetailTeam() + "," + gameDetails.get(gameDetails.size()-1).getDetailPlayer() + "," + gameDetails.get(gameDetails.size()-1).getDetailTime();
@@ -226,13 +227,12 @@ public class Game {
                                 String homeID = ob.getString("home_id");
                                 String awayID = ob.getString("away_id");
  
-                                Game game = new Game(homeTeam, awayTeam, score, time);
+                                Game game = new Game(homeTeam, awayTeam, score, time+"\"");
                                 game.setHomeId(homeID);
                                 game.setAwayId(awayID);
                                 gamesListLive.add(game);
                         }
                 } catch (JSONException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                 }
                
