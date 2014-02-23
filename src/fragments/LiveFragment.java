@@ -28,7 +28,6 @@ public class LiveFragment extends Fragment implements OnItemClickListener{
 	private ArrayList<Game> gameArray;
 	private Football_List_Adapter adapter;
 	public ListView gamesList;
-	public LiveFragment fragment=this;
 
 	
 
@@ -61,6 +60,7 @@ public class LiveFragment extends Fragment implements OnItemClickListener{
 		adapter = new Football_List_Adapter(getView().getContext(), gameArray);
 		gamesList.setAdapter(adapter);
 
+		gamesList.setOnItemClickListener(this);
 	}
 
 	protected class Thread extends AsyncTask<Void, Void, ArrayList<Game>> {
@@ -166,7 +166,7 @@ public class LiveFragment extends Fragment implements OnItemClickListener{
 		Game game=(Game) gamesList.getItemAtPosition(arg2);
 		
 		SimpleDialogFragment dialogFragment = SimpleDialogFragment.newInstance("Details",game);
-        dialogFragment.show(fragment.getFragmentManager(), "Mak");
+        dialogFragment.show(this.getFragmentManager(),"");
 		
 	}
 
