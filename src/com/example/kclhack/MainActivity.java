@@ -8,27 +8,42 @@ import java.util.concurrent.ExecutionException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.getpebble.android.kit.PebbleKit;
 
 import data_types.Football_List_Adapter;
 import data_types.Game;
 
+@SuppressLint("CutPasteId")
 public class MainActivity extends Activity {
 	private ArrayList<Game> gameArray;
 	private Football_List_Adapter adapter;
-
+	private Typeface aubrey;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		aubrey = Typeface.createFromAsset(getAssets(), "fonts/aubrey.ttf");
+		TextView labelUser = (TextView) findViewById(R.id.textView3);
+		TextView labelPassword = (TextView) findViewById(R.id.textView2);
+		TextView labelSignup = (TextView) findViewById(R.id.textView1);
+		labelUser.setTypeface(aubrey);
+		labelPassword.setTypeface(aubrey);
+		labelSignup.setTypeface(aubrey);
+
+
+		
 		gameArray = new ArrayList<Game>();
 		try {
 			populate();
