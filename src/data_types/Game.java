@@ -23,7 +23,25 @@ import android.util.Log;
 import com.example.kclhack.MainActivity;
 
 public class Game {
-	private String team_One, team_Two, score, latestUpdate;
+	private String team_One, team_Two, score, latestUpdate,homeid,awayid;
+	public String getHomeId() {
+		return homeid;
+	}
+
+	public void setHomeId(String id) {
+		this.homeid = id;
+	}
+	
+	public String getAwayId()
+	{
+		return awayid;
+	}
+	
+	public void setAwayId(String id)
+	{
+		this.awayid = id;
+	}
+
 	private String time;
 	public static ArrayList<GameDetail> gameDetails = new ArrayList<GameDetail>();
 	
@@ -167,6 +185,9 @@ public class Game {
 			JSONArray arr = new JSONArray(jsonString);
 			for (int i = 0; i < arr.length(); i++) {
 				JSONObject ob = arr.getJSONObject(i);
+				String homeID = ob.getString("home_id");
+				String awayID = ob.getString("away_id");
+				
 				String time = ob.getString("date");
 				String score = ob.getJSONArray("fulltime").getString(0) + "-"
 						+ ob.getJSONArray("fulltime").getString(1);
@@ -174,6 +195,8 @@ public class Game {
 				String awayTeam = ob.getString("away");
 
 				Game game = new Game(homeTeam, awayTeam, score, time);
+				game.setHomeId(homeID);
+				game.setAwayId(awayID);
 				gamesListPast.add(game);
 			}
 		} catch (JSONException e) {
